@@ -912,10 +912,10 @@
         <div class="metric-sub">Regional itinerary articles</div>
       </div>
       <div class="metric-card soft">
-        <span class="metric-icon">🏕️</span>
-        <div class="metric-val large">15,384</div>
-        <div class="metric-label">Free Campsites Pages</div>
-        <div class="metric-sub">Region-level campsite listings</div>
+        <span class="metric-icon">🗺️</span>
+        <div class="metric-val large">2,711</div>
+        <div class="metric-label">Itinerary Page Views</div>
+        <div class="metric-sub">Curated itinerary pages linked from hub</div>
       </div>
       <div class="metric-card">
         <span class="metric-icon">👥</span>
@@ -943,26 +943,25 @@
       </div>
       <div class="table-wrap">
         <table class="data-table">
-          <thead><tr><th>Free Campsites Page</th><th>Views</th><th>Users</th></tr></thead>
+          <thead><tr><th>Itinerary Collection</th><th>Views</th><th>Users</th></tr></thead>
           <tbody>
-            <tr><td><strong>Free Campsites in Coromandel</strong></td><td class="num positive">2,870</td><td class="num">265</td></tr>
-            <tr><td><strong>Free Campsites in Auckland</strong></td><td class="num positive">2,066</td><td class="num">232</td></tr>
-            <tr><td><strong>Free Campsites in Taupo</strong></td><td class="num positive">1,586</td><td class="num">175</td></tr>
-            <tr><td><strong>Free Campsites in Hawke's Bay</strong></td><td class="num">1,416</td><td class="num">128</td></tr>
-            <tr><td><strong>Free Campsites in Taranaki</strong></td><td class="num">1,012</td><td class="num">113</td></tr>
-            <tr><td><strong>Free Campsites in Northland</strong></td><td class="num">1,083</td><td class="num">127</td></tr>
+            <tr><td><strong>Set 2 — Central NI (5 itineraries)</strong></td><td class="num positive">945</td><td class="num">129</td></tr>
+            <tr><td><strong>Set 3 — South NI (5 itineraries)</strong></td><td class="num positive">902</td><td class="num">172</td></tr>
+            <tr><td><strong>Set 1 — North NI (7 itineraries)</strong></td><td class="num positive">864</td><td class="num">121</td></tr>
+            <tr style="font-weight:700;background:#f0fdf4"><td>Total (17 itineraries)</td><td class="num positive">2,711</td><td class="num">422</td></tr>
           </tbody>
         </table>
+        <div style="font-size:12px;color:var(--muted);margin-top:8px;line-height:1.6">Curated itinerary pages linked from the KiwiNorth landing page. Each set contains multiple suggested routes across North Island regions. Includes all locales (EN, NL, DE, ZH, KO, ES).</div>
       </div>
     </div>
 
     <div class="section-title">Views by Page Type</div>
     <div class="chart-card">
       <div class="chart-title">Content Performance — KiwiNorth Campaign Pages (Jan 26 – Mar 30)</div>
-      <div class="chart-sub">Source: Google Analytics via BigQuery · campsite/POI pages excluded (broad regional match)</div>
+      <div class="chart-sub">Source: Google Analytics via BigQuery</div>
       <canvas id="gaChart" height="100"></canvas>
     </div>
-    <p class="footnote">* Data from triptech.analytics_prod.stg_ga_web_events filtered for KiwiNorth landing pages, editorial guides, and free campsite listing pages matching the 18 campaign regions. Campsite/POI pages (543K views) excluded as they represent broad regional traffic, not campaign-specific.</p>
+    <p class="footnote">* Data from triptech.analytics_prod.stg_ga_web_events filtered for KiwiNorth landing page, editorial guide pages, and itinerary pages linked from the hub. Broad campsite/POI pages excluded as they represent general regional traffic.</p>
   </div>
 </div>
 
@@ -1019,13 +1018,120 @@
     </div>
 
     <div class="section-title" style="margin-top:28px">Coverage by Channel</div>
-    <div class="chart-card">
+    <div class="chart-card" style="margin-bottom:32px">
       <div class="chart-title">Impression Reach by Channel — KiwiNorth 2026</div>
       <div class="chart-sub">Total unique touchpoints across all campaign channels</div>
       <canvas id="channelChart" height="100"></canvas>
     </div>
 
-    <p class="footnote">* Content Cards launched Mar 12, 2026 — impression data builds as users open the app and the cards are surfaced in their feed. Early-stage data expected.</p>
+    <div class="section-title">Regional Performance — CamperMate App (Jan–Mar 2026)</div>
+    <div class="metric-grid cols-3" style="margin-bottom:20px">
+      <div class="metric-card accent">
+        <span class="metric-icon">👁️</span>
+        <div class="metric-val large">2.5M</div>
+        <div class="metric-label">Total POI Profile Views</div>
+        <div class="metric-sub">Across 18 KiwiNorth regions · Source: BigQuery</div>
+      </div>
+      <div class="metric-card highlight">
+        <span class="metric-icon">🔗</span>
+        <div class="metric-val large">706K</div>
+        <div class="metric-label">Total Profile Leads</div>
+        <div class="metric-sub">Clicks to website, phone, directions &amp; bookings</div>
+      </div>
+      <div class="metric-card soft">
+        <span class="metric-icon">✈️</span>
+        <div class="metric-val large">187,617</div>
+        <div class="metric-label">International Visitors</div>
+        <div class="metric-sub">To KiwiNorth tourism regions · Stage 1 2026</div>
+      </div>
+    </div>
+
+    <div class="metric-grid cols-2" style="margin-bottom:24px">
+      <div class="table-wrap">
+        <div style="font-size:13px;font-weight:700;color:var(--kiwi-dark);margin-bottom:8px">POI Profile Views &amp; Leads by Region</div>
+        <table class="data-table">
+          <thead><tr><th>Region</th><th>Profile Views</th><th>Leads</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Northland</strong></td><td class="num positive">300,367</td><td class="num">81,757</td></tr>
+            <tr><td><strong>Auckland</strong></td><td class="num positive">292,694</td><td class="num">93,765</td></tr>
+            <tr><td><strong>Coromandel</strong></td><td class="num positive">291,454</td><td class="num">85,775</td></tr>
+            <tr><td><strong>Waikato</strong></td><td class="num positive">255,706</td><td class="num">73,883</td></tr>
+            <tr><td><strong>Taupo</strong></td><td class="num positive">213,575</td><td class="num">67,348</td></tr>
+            <tr><td><strong>Wellington</strong></td><td class="num">202,968</td><td class="num">48,694</td></tr>
+            <tr><td><strong>Coastal Bay of Plenty</strong></td><td class="num">197,118</td><td class="num">48,673</td></tr>
+            <tr><td><strong>Rotorua</strong></td><td class="num">172,162</td><td class="num">54,270</td></tr>
+            <tr><td><strong>Taranaki</strong></td><td class="num">170,909</td><td class="num">45,172</td></tr>
+            <tr><td><strong>Ruapehu</strong></td><td class="num">106,890</td><td class="num">31,158</td></tr>
+            <tr><td><strong>Hawke's Bay</strong></td><td class="num">90,462</td><td class="num">24,145</td></tr>
+            <tr><td><strong>Whanganui</strong></td><td class="num">44,884</td><td class="num">11,759</td></tr>
+            <tr><td><strong>Wairarapa</strong></td><td class="num">43,041</td><td class="num">12,340</td></tr>
+            <tr><td><strong>Gisborne</strong></td><td class="num">34,954</td><td class="num">9,336</td></tr>
+            <tr><td><strong>Manawatu</strong></td><td class="num">34,275</td><td class="num">8,178</td></tr>
+            <tr><td><strong>Horowhenua</strong></td><td class="num">18,300</td><td class="num">4,629</td></tr>
+            <tr><td><strong>Rangitikei</strong></td><td class="num">15,883</td><td class="num">5,046</td></tr>
+            <tr><td><strong>Kawerau</strong></td><td class="num">1,877</td><td class="num">412</td></tr>
+            <tr style="font-weight:700;background:#f0fdf4"><td>Total</td><td class="num positive">2,487,519</td><td class="num positive">706,340</td></tr>
+          </tbody>
+        </table>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px">Source: triptech.analytics_prod.poi_monthly_events · Jan–Mar 2026</div>
+      </div>
+      <div>
+        <div class="table-wrap" style="margin-bottom:16px">
+          <div style="font-size:13px;font-weight:700;color:var(--kiwi-dark);margin-bottom:8px">New Food &amp; Beverage POIs Added</div>
+          <table class="data-table">
+            <thead><tr><th>Region</th><th>New F&amp;B POIs</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Auckland</strong></td><td class="num positive">34</td></tr>
+              <tr><td><strong>Waikato</strong></td><td class="num positive">22</td></tr>
+              <tr><td><strong>Taranaki</strong></td><td class="num">20</td></tr>
+              <tr><td><strong>Manawatu</strong></td><td class="num">19</td></tr>
+              <tr><td><strong>Coastal Bay of Plenty</strong></td><td class="num">18</td></tr>
+              <tr><td><strong>Ruapehu</strong></td><td class="num">17</td></tr>
+              <tr><td><strong>Northland</strong></td><td class="num">16</td></tr>
+              <tr><td><strong>Hawke's Bay</strong></td><td class="num">15</td></tr>
+              <tr><td><strong>Taupo</strong></td><td class="num">14</td></tr>
+              <tr><td><strong>Coromandel</strong></td><td class="num">13</td></tr>
+              <tr><td><strong>Rotorua</strong></td><td class="num">13</td></tr>
+              <tr><td><strong>Gisborne</strong></td><td class="num">11</td></tr>
+              <tr><td><strong>Whanganui</strong></td><td class="num">8</td></tr>
+              <tr><td><strong>Tararua</strong></td><td class="num">1</td></tr>
+              <tr style="font-weight:700;background:#f0fdf4"><td>Total</td><td class="num positive">221</td></tr>
+            </tbody>
+          </table>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px">Source: Power BI — KiwiNorth Stage 1 2026</div>
+        </div>
+        <div class="table-wrap">
+          <div style="font-size:13px;font-weight:700;color:var(--kiwi-dark);margin-bottom:8px">International Visitors by Region</div>
+          <table class="data-table">
+            <thead><tr><th>Region</th><th>Int'l Visitors</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Auckland</strong></td><td class="num positive">27,246</td></tr>
+              <tr><td><strong>Waikato</strong></td><td class="num positive">19,418</td></tr>
+              <tr><td><strong>Wellington</strong></td><td class="num">18,436</td></tr>
+              <tr><td><strong>Taupo</strong></td><td class="num">17,515</td></tr>
+              <tr><td><strong>Rotorua</strong></td><td class="num">15,967</td></tr>
+              <tr><td><strong>Coromandel</strong></td><td class="num">14,320</td></tr>
+              <tr><td><strong>Ruapehu</strong></td><td class="num">10,808</td></tr>
+              <tr><td><strong>Northland</strong></td><td class="num">10,697</td></tr>
+              <tr><td><strong>Coastal Bay of Plenty</strong></td><td class="num">9,809</td></tr>
+              <tr><td><strong>Taranaki</strong></td><td class="num">9,034</td></tr>
+              <tr><td><strong>Whanganui</strong></td><td class="num">5,928</td></tr>
+              <tr><td><strong>Hawke's Bay</strong></td><td class="num">5,873</td></tr>
+              <tr><td><strong>Manawatu</strong></td><td class="num">5,190</td></tr>
+              <tr><td><strong>Rangitikei</strong></td><td class="num">4,832</td></tr>
+              <tr><td><strong>Horowhenua</strong></td><td class="num">4,615</td></tr>
+              <tr><td><strong>Wairarapa</strong></td><td class="num">3,518</td></tr>
+              <tr><td><strong>Gisborne</strong></td><td class="num">1,841</td></tr>
+              <tr><td><strong>Kawerau</strong></td><td class="num">208</td></tr>
+              <tr style="font-weight:700;background:#f0fdf4"><td>Total</td><td class="num positive">187,617</td></tr>
+            </tbody>
+          </table>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px">Source: Power BI — KiwiNorth Stage 1 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="footnote">* POI Profile Views and Leads sourced from BigQuery (triptech.analytics_prod.poi_monthly_events), Jan–Mar 2026. Leads = sum of website, phone, email, directions, bookings, social and favourite clicks. New F&amp;B POIs and International Visitors sourced from Power BI KiwiNorth Stage 1 dashboard.</p>
   </div>
 </div>
 
@@ -1179,8 +1285,8 @@
           <div class="progress-bar"><div class="progress-fill" style="width:38%"></div></div>
         </div>
         <div class="progress-row">
-          <div class="progress-header"><span>Free Campsites Pages</span><span style="font-weight:700">15,384 views</span></div>
-          <div class="progress-bar"><div class="progress-fill orange" style="width:33%"></div></div>
+          <div class="progress-header"><span>Itinerary Pages</span><span style="font-weight:700">2,711 views</span></div>
+          <div class="progress-bar"><div class="progress-fill orange" style="width:6%"></div></div>
         </div>
       </div>
     </div>
@@ -1374,17 +1480,17 @@
   new Chart(document.getElementById('gaChart'), {
     type: 'bar',
     data: {
-      labels: ['KiwiNorth Landing Page', 'Blog / Guides', 'Free Campsites Pages'],
+      labels: ['KiwiNorth Landing Page', 'Blog / Guides', 'Itinerary Pages'],
       datasets: [
         {
           label: 'Page Views',
-          data: [27711, 17453, 15384],
+          data: [27711, 17453, 2711],
           backgroundColor: [GREEN, LIGHT, ACCENT],
           borderRadius: 6,
         },
         {
           label: 'Unique Visitors',
-          data: [4766, 1860, 1756],
+          data: [4766, 1860, 422],
           backgroundColor: ['rgba(45,106,79,0.3)', 'rgba(82,183,136,0.3)', 'rgba(244,162,97,0.3)'],
           borderRadius: 6,
         }
