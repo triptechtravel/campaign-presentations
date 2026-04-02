@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSW Travel Distance Analysis — CamperMate App Data</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #111827; color: #f3f4f6; padding: 24px; }
+  a { color: #14b8a6; }
+  .header { max-width: 1200px; margin: 0 auto 32px; }
+  .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; color: #fce94e; }
+  .header p { color: #9ca3af; font-size: 14px; line-height: 1.5; }
+  .subtitle { font-size: 16px; color: #d1d5db; margin-bottom: 4px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1200px; margin: 0 auto; }
+  .card { background: #1f2937; border-radius: 12px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.3); border: 1px solid #374151; }
+  .card-full { grid-column: 1 / -1; }
+  .card h2 { font-size: 16px; font-weight: 600; margin-bottom: 4px; color: #f9fafb; }
+  .card .desc { font-size: 13px; color: #9ca3af; margin-bottom: 16px; }
+  .kpi-row { display: flex; gap: 16px; margin-bottom: 24px; max-width: 1200px; margin: 0 auto 24px; flex-wrap: wrap; }
+  .kpi { background: #1f2937; border-radius: 12px; padding: 20px 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.3); border: 1px solid #374151; flex: 1; min-width: 200px; }
+  .kpi .label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: #9ca3af; margin-bottom: 4px; }
+  .kpi .value { font-size: 32px; font-weight: 700; }
+  .kpi .detail { font-size: 13px; color: #9ca3af; margin-top: 4px; }
+  .down { color: #ef4444; }
+  .up { color: #10b981; }
+  canvas { max-height: 360px; }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; padding: 10px 12px; border-bottom: 2px solid #374151; font-weight: 600; color: #d1d5db; }
+  td { padding: 10px 12px; border-bottom: 1px solid #1f2937; color: #e5e7eb; }
+  tr:hover td { background: #374151; }
+  .neg { color: #ef4444; font-weight: 600; }
+  .pos { color: #10b981; font-weight: 600; }
+  .section-label { max-width: 1200px; margin: 32px auto 12px; font-size: 20px; font-weight: 700; color: #fce94e; }
+  .section-desc { max-width: 1200px; margin: 0 auto 16px; font-size: 14px; color: #9ca3af; }
+  .footer { max-width: 1200px; margin: 32px auto 0; padding-top: 16px; border-top: 1px solid #374151; font-size: 12px; color: #6b7280; }
+  .footer strong { color: #9ca3af; }
+  .logo-bar { max-width: 1200px; margin: 0 auto 24px; display: flex; align-items: center; gap: 12px; }
+  .logo-bar .dot { width: 12px; height: 12px; border-radius: 50%; background: #fce94e; }
+  .logo-bar span { font-size: 14px; font-weight: 600; color: #fce94e; letter-spacing: 1px; text-transform: uppercase; }
+  @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="logo-bar"><img src="https://webdata.campermate.com/assets/images/CM-white.svg" alt="CamperMate" height="36"></div>
+
+<div class="header">
+  <h1>NSW Passenger Movement Analysis</h1>
+  <p class="subtitle">Are travellers covering less distance? How do domestic and international visitors compare?</p>
+  <p>Data: CamperMate app GPS data &mdash; Jan&ndash;Mar 2025 vs Jan&ndash;Mar 2026 &mdash; New South Wales only</p>
+</div>
+
+<div style="max-width:1200px; margin:0 auto 28px; background:#1f2937; border-radius:12px; padding:24px 28px; border:1px solid #374151;">
+  <h2 style="font-size:18px; font-weight:700; color:#fce94e; margin-bottom:14px;">Key Findings</h2>
+  <ul style="list-style:none; padding:0; font-size:15px; line-height:1.8; color:#e5e7eb;">
+    <li style="margin-bottom:8px;"><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>Australian travellers are covering far less ground.</strong> The typical domestic user travelled just 8.5 km across NSW in March 2026, down from 46.7 km a year earlier &mdash; an 82% drop.</li>
+    <li style="margin-bottom:8px;"><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>International visitors are also moving less, but still touring.</strong> Their typical travel distance fell 44% year-on-year (256 km &rarr; 144 km), though most are still visiting multiple regions.</li>
+    <li style="margin-bottom:8px;"><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>More people are staying put in a single region.</strong> 72% of domestic users and 50% of international users stayed within one NSW tourism region in March 2026, up from 60% and 38% respectively.</li>
+    <li><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>Even long-distance road-trippers are pulling back.</strong> Domestic users who would typically tour 280+ km dropped to under 150 km &mdash; nearly halved.</li>
+  </ul>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi">
+    <div class="label">Domestic Median Spread (Mar)</div>
+    <div class="value down">8.5 km</div>
+    <div class="detail">was 46.7 km in Mar 2025 &mdash; <span class="down">-82% YoY</span></div>
+  </div>
+  <div class="kpi">
+    <div class="label">International Median Spread (Mar)</div>
+    <div class="value down">143.5 km</div>
+    <div class="detail">was 255.5 km in Mar 2025 &mdash; <span class="down">-44% YoY</span></div>
+  </div>
+  <div class="kpi">
+    <div class="label">Domestic Single-Region (Mar)</div>
+    <div class="value down">71.6%</div>
+    <div class="detail">was 59.7% in Mar 2025 &mdash; <span class="down">+11.9pp</span></div>
+  </div>
+  <div class="kpi">
+    <div class="label">International Single-Region (Mar)</div>
+    <div class="value down">49.8%</div>
+    <div class="detail">was 38.3% in Mar 2025 &mdash; <span class="down">+11.5pp</span></div>
+  </div>
+</div>
+
+<!-- SECTION: TRAVEL DISTANCE -->
+<div class="section-label">How far are people travelling?</div>
+<div class="section-desc">Measured by the straight-line distance (km) between each user&rsquo;s furthest-apart GPS positions within NSW per month. Only users with 3+ location readings included. Split by home country (derived from device settings).</div>
+
+<div class="grid">
+
+  <!-- Chart 1: Domestic vs International median spread -->
+  <div class="card card-full">
+    <h2>Median Travel Spread by Origin &mdash; Monthly Trend</h2>
+    <p class="desc">Domestic users (Australian device locale) vs international visitors. Domestic travellers have collapsed to near-zero in 2026, while international visitors are down but still touring.</p>
+    <canvas id="spreadByOriginChart" style="max-height:300px"></canvas>
+  </div>
+
+  <!-- Chart 2: Percentile breakdown March YoY - Domestic -->
+  <div class="card">
+    <h2>Domestic Travel Spread &mdash; March YoY</h2>
+    <p class="desc">Percentile breakdown. The entire domestic distribution has compressed toward zero &mdash; even P75 road-trippers are covering less ground.</p>
+    <canvas id="domesticQuartileChart"></canvas>
+  </div>
+
+  <!-- Chart 3: Percentile breakdown March YoY - International -->
+  <div class="card">
+    <h2>International Travel Spread &mdash; March YoY</h2>
+    <p class="desc">International visitors still cover substantial distances. The P50 median is down 44% but P90 long-haulers are holding steady.</p>
+    <canvas id="intlQuartileChart"></canvas>
+  </div>
+
+  <!-- Chart 4: Avg travel spread by origin -->
+  <div class="card">
+    <h2>Average Travel Spread by Origin (km)</h2>
+    <p class="desc">Mean spread, pulled up by long-haul travellers. International visitors consistently 2&ndash;3x higher than domestic.</p>
+    <canvas id="avgSpreadChart"></canvas>
+  </div>
+
+  <!-- Chart 5: Single-region % by origin -->
+  <div class="card">
+    <h2>% Users Staying in a Single Region</h2>
+    <p class="desc">Share of users detected in only one tourism region that month. Both segments trending up, but domestic users are increasingly stationary.</p>
+    <canvas id="singleChart"></canvas>
+  </div>
+
+  <!-- Chart 6: User counts by origin -->
+  <div class="card card-full">
+    <h2>Active Users by Origin &mdash; Monthly</h2>
+    <p class="desc">Total active users per month (minimum 3 location readings). The &ldquo;Unclassified&rdquo; segment (likely domestic) grows in early 2026 as newer app versions outpaced our home-country classification.</p>
+    <canvas id="userCountChart" style="max-height:280px"></canvas>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p><strong>Source:</strong> CamperMate app GPS location data, geocoded to NSW tourism regions using Destination NSW official boundary files.</p>
+  <p><strong>Methodology:</strong> Travel spread measures the straight-line distance (km) between a user&rsquo;s furthest-apart GPS positions within NSW for a given month. Only users with 3 or more location readings are included. Home country is determined from the user&rsquo;s device language and region settings. Tourism region boundaries are official Destination NSW polygons.</p>
+  <p><strong>Assumptions &amp; Caveats:</strong></p>
+  <ul style="margin:6px 0 0 18px; line-height:1.7;">
+    <li>CamperMate&rsquo;s user base skews toward camping and touring travellers (caravanners, road-trippers, backpackers). Results may not be representative of all NSW visitors.</li>
+    <li>We can identify a user&rsquo;s home <em>country</em> but not their home <em>state</em>. &ldquo;Domestic&rdquo; means an Australian device &mdash; we cannot separate intra-NSW locals from interstate visitors.</li>
+    <li>Home country classification for some recent app users is still being processed. These appear as &ldquo;Unclassified&rdquo; in the user count chart and are excluded from the domestic/international breakdowns.</li>
+    <li>Travel spread is a straight-line measure between the two most distant points, not actual road distance travelled. It provides a lower-bound estimate of total distance covered.</li>
+  </ul>
+  <p style="margin-top:10px;">Generated 2 April 2026.</p>
+</div>
+
+<script>
+const C = (id) => document.getElementById(id).getContext('2d');
+
+// CamperMate brand palette
+const cmYellow = '#fce94e';
+const cmTeal = '#14b8a6';
+const cmIndigo = '#6366f1';
+const cmPink = '#ec4899';
+const cmGreen = '#10b981';
+const cmRed = '#ef4444';
+const cmAmber = '#f59e0b';
+const cmGray = '#6b7280';
+
+const months = ['Jan', 'Feb', 'Mar'];
+
+// Chart.js global defaults for dark theme
+Chart.defaults.color = '#9ca3af';
+Chart.defaults.borderColor = '#374151';
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.legend.labels.padding = 16;
+
+// ── Data ──
+
+const spread = {
+  // Domestic median
+  domMedian2025: [59.5, 43.8, 46.7],
+  domMedian2026: [43.5, 20.9, 8.5],
+  // International median
+  intlMedian2025: [243.5, 253.8, 255.5],
+  intlMedian2026: [229.8, 177.6, 143.5],
+  // Unclassified median
+  uncMedian2025: [118.0, 111.9, 67.1],
+  uncMedian2026: [91.9, 0.1, 0.0],
+  // Average by origin
+  domAvg2025: [191.6, 170.6, 183.8],
+  domAvg2026: [183.5, 147.3, 124.8],
+  intlAvg2025: [316.9, 327.9, 332.4],
+  intlAvg2026: [310.8, 283.3, 272.5],
+};
+
+const quartiles = {
+  // Domestic March
+  domP10_2025: 0.0,  domP25_2025: 1.7,   domP50_2025: 46.7,  domP75_2025: 278.2, domP90_2025: 610.0,
+  domP10_2026: 0.0,  domP25_2026: 0.0,   domP50_2026: 8.5,   domP75_2026: 146.7, domP90_2026: 460.0,
+  // International March
+  intlP10_2025: 0.7, intlP25_2025: 22.9, intlP50_2025: 255.5, intlP75_2025: 597.5, intlP90_2025: 775.2,
+  intlP10_2026: 0.0, intlP25_2026: 1.1,  intlP50_2026: 143.5, intlP75_2026: 513.0, intlP90_2026: 688.1,
+};
+
+const regions = {
+  domSingle2025: [57.2, 60.9, 59.7],
+  domSingle2026: [59.9, 66.9, 71.6],
+  intlSingle2025: [39.8, 40.6, 38.3],
+  intlSingle2026: [38.0, 43.7, 49.8],
+};
+
+const userCounts = {
+  dom2025: [5744, 3998, 4412],
+  dom2026: [2967, 2543, 4929],
+  intl2025: [7436, 6046, 6578],
+  intl2026: [3987, 3762, 7013],
+  unc2025: [361, 170, 192],
+  unc2026: [173, 326, 2335],
+};
+
+// ── Shared chart options ──
+const lineOpts = (yLabel) => ({
+  responsive: true,
+  plugins: { legend: { position: 'top' } },
+  scales: { y: { beginAtZero: false, title: { display: true, text: yLabel }, grid: { color: '#374151' } }, x: { grid: { color: '#374151' } } }
+});
+
+const lineset = (label, data, color, dashed) => ({
+  label, data, borderColor: color, backgroundColor: color + '33',
+  fill: false, tension: 0.3, pointRadius: 6, pointHoverRadius: 8, borderWidth: 2.5,
+  borderDash: dashed ? [6, 4] : []
+});
+
+// ── Chart 1: Median spread by origin ──
+new Chart(C('spreadByOriginChart'), {
+  type: 'line',
+  data: {
+    labels: months,
+    datasets: [
+      lineset('Domestic 2025', spread.domMedian2025, cmTeal),
+      lineset('Domestic 2026', spread.domMedian2026, cmYellow),
+      lineset('Intl 2025', spread.intlMedian2025, cmTeal, true),
+      lineset('Intl 2026', spread.intlMedian2026, cmYellow, true),
+    ]
+  },
+  options: lineOpts('Median km')
+});
+
+// ── Chart 2: Domestic quartile bar (March) ──
+new Chart(C('domesticQuartileChart'), {
+  type: 'bar',
+  data: {
+    labels: ['P10', 'P25', 'P50', 'P75', 'P90'],
+    datasets: [
+      { label: 'Mar 2025', data: [quartiles.domP10_2025, quartiles.domP25_2025, quartiles.domP50_2025, quartiles.domP75_2025, quartiles.domP90_2025], backgroundColor: cmTeal + 'cc', borderRadius: 4 },
+      { label: 'Mar 2026', data: [quartiles.domP10_2026, quartiles.domP25_2026, quartiles.domP50_2026, quartiles.domP75_2026, quartiles.domP90_2026], backgroundColor: cmYellow + 'cc', borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: { y: { title: { display: true, text: 'km' }, grid: { color: '#374151' } }, x: { grid: { color: '#374151' } } }
+  }
+});
+
+// ── Chart 3: International quartile bar (March) ──
+new Chart(C('intlQuartileChart'), {
+  type: 'bar',
+  data: {
+    labels: ['P10', 'P25', 'P50', 'P75', 'P90'],
+    datasets: [
+      { label: 'Mar 2025', data: [quartiles.intlP10_2025, quartiles.intlP25_2025, quartiles.intlP50_2025, quartiles.intlP75_2025, quartiles.intlP90_2025], backgroundColor: cmTeal + 'cc', borderRadius: 4 },
+      { label: 'Mar 2026', data: [quartiles.intlP10_2026, quartiles.intlP25_2026, quartiles.intlP50_2026, quartiles.intlP75_2026, quartiles.intlP90_2026], backgroundColor: cmYellow + 'cc', borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: { y: { title: { display: true, text: 'km' }, grid: { color: '#374151' } }, x: { grid: { color: '#374151' } } }
+  }
+});
+
+// ── Chart 4: Avg spread by origin ──
+new Chart(C('avgSpreadChart'), {
+  type: 'line',
+  data: {
+    labels: months,
+    datasets: [
+      lineset('Domestic 2025', spread.domAvg2025, cmTeal),
+      lineset('Domestic 2026', spread.domAvg2026, cmYellow),
+      lineset('Intl 2025', spread.intlAvg2025, cmTeal, true),
+      lineset('Intl 2026', spread.intlAvg2026, cmYellow, true),
+    ]
+  },
+  options: lineOpts('Avg km')
+});
+
+// ── Chart 5: Single-region % ──
+new Chart(C('singleChart'), {
+  type: 'line',
+  data: {
+    labels: months,
+    datasets: [
+      lineset('Domestic 2025', regions.domSingle2025, cmTeal),
+      lineset('Domestic 2026', regions.domSingle2026, cmYellow),
+      lineset('Intl 2025', regions.intlSingle2025, cmTeal, true),
+      lineset('Intl 2026', regions.intlSingle2026, cmYellow, true),
+    ]
+  },
+  options: { ...lineOpts('%'), scales: { y: { min: 30, max: 80, title: { display: true, text: '%' }, grid: { color: '#374151' } }, x: { grid: { color: '#374151' } } } }
+});
+
+// ── Chart 6: User counts stacked bar ──
+new Chart(C('userCountChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Jan 25', 'Feb 25', 'Mar 25', 'Jan 26', 'Feb 26', 'Mar 26'],
+    datasets: [
+      { label: 'Domestic', data: [...userCounts.dom2025, ...userCounts.dom2026], backgroundColor: cmTeal, borderRadius: 2 },
+      { label: 'International', data: [...userCounts.intl2025, ...userCounts.intl2026], backgroundColor: cmIndigo, borderRadius: 2 },
+      { label: 'Unclassified (likely domestic)', data: [...userCounts.unc2025, ...userCounts.unc2026], backgroundColor: cmGray, borderRadius: 2 },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: { stacked: true, title: { display: true, text: 'Users' }, grid: { color: '#374151' } },
+      x: { stacked: true, grid: { color: '#374151' } }
+    }
+  }
+});
+</script>
+</body>
+</html>

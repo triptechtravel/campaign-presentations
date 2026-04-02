@@ -8,6 +8,12 @@ Interactive HTML presentations for TripTech campaign performance reporting. Each
 |----------|--------|-------------|
 | KiwiNorth 2026 | [campaigns/kiwi-north-2026/](campaigns/kiwi-north-2026/) | [View →](https://htmlpreview.github.io/?https://raw.githubusercontent.com/triptechtravel/campaign-presentations/main/campaigns/kiwi-north-2026/presentation.html) |
 
+## Other Reports
+
+| Report | Folder | Description |
+|--------|--------|-------------|
+| NSW Transport Minister | [nsw-reflections-transport-minister/](nsw-reflections-transport-minister/) | NSW passenger movement analysis (Jan–Mar 2025 vs 2026) — domestic vs international travel distance |
+
 ## Structure
 
 ```
