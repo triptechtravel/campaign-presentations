@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSW Passenger Movement Analysis — CamperMate App Data</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #111827; color: #f3f4f6; padding: 24px; }
+  a { color: #14b8a6; }
+  .header { max-width: 1200px; margin: 0 auto 32px; }
+  .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; color: #fce94e; }
+  .header p { color: #9ca3af; font-size: 14px; line-height: 1.5; }
+  .subtitle { font-size: 16px; color: #d1d5db; margin-bottom: 4px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1200px; margin: 0 auto; }
+  .card { background: #1f2937; border-radius: 12px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.3); border: 1px solid #374151; }
+  .card-full { grid-column: 1 / -1; }
+  .card h2 { font-size: 16px; font-weight: 600; margin-bottom: 4px; color: #f9fafb; }
+  .card .desc { font-size: 13px; color: #9ca3af; margin-bottom: 16px; }
+  .kpi-row { display: flex; gap: 16px; margin-bottom: 24px; max-width: 1200px; margin: 0 auto 24px; flex-wrap: wrap; }
+  .kpi { background: #1f2937; border-radius: 12px; padding: 20px 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.3); border: 1px solid #374151; flex: 1; min-width: 200px; }
+  .kpi .label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: #9ca3af; margin-bottom: 4px; }
+  .kpi .value { font-size: 32px; font-weight: 700; }
+  .kpi .detail { font-size: 13px; color: #9ca3af; margin-top: 4px; }
+  .down { color: #ef4444; }
+  .up { color: #10b981; }
+  canvas { max-height: 360px; }
+  .section-label { max-width: 1200px; margin: 32px auto 12px; font-size: 20px; font-weight: 700; color: #fce94e; }
+  .section-desc { max-width: 1200px; margin: 0 auto 16px; font-size: 14px; color: #9ca3af; }
+  .footer { max-width: 1200px; margin: 32px auto 0; padding-top: 16px; border-top: 1px solid #374151; font-size: 12px; color: #6b7280; }
+  .footer strong { color: #9ca3af; }
+  .logo-bar { max-width: 1200px; margin: 0 auto 24px; display: flex; align-items: center; gap: 12px; }
+  @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="logo-bar"><img src="https://webdata.campermate.com/assets/images/CM-white.svg" alt="CamperMate" height="36"></div>
+
+<div class="header">
+  <h1>NSW Passenger Movement Analysis</h1>
+  <p class="subtitle">Are travellers covering less distance?</p>
+  <p>Data: CamperMate app GPS data &mdash; Jan&ndash;Mar 2025 vs Jan&ndash;Mar 2026 &mdash; New South Wales only</p>
+</div>
+
+<div style="max-width:1200px; margin:0 auto 28px; background:#1f2937; border-radius:12px; padding:24px 28px; border:1px solid #374151;">
+  <h2 style="font-size:18px; font-weight:700; color:#fce94e; margin-bottom:14px;">Key Findings</h2>
+  <ul style="list-style:none; padding:0; font-size:15px; line-height:1.8; color:#e5e7eb;">
+    <li style="margin-bottom:8px;"><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>The typical user&rsquo;s travel distance has collapsed.</strong> Median travel spread fell from 141 km to just 15 km in March &mdash; an 89% drop year-on-year.</li>
+    <li style="margin-bottom:8px;"><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>More people are staying put in a single region.</strong> 64% of users stayed within one NSW tourism region in March 2026, up from 47% a year earlier.</li>
+    <li><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>Even committed road-trippers are covering less ground.</strong> The top 25% of travellers saw their typical distance drop from 477 km to 314 km &mdash; a 34% decline.</li>
+  </ul>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi">
+    <div class="label">Median Travel Spread (Mar)</div>
+    <div class="value down">15.0 km</div>
+    <div class="detail">was 140.8 km in Mar 2025 &mdash; <span class="down">-89.3% YoY</span></div>
+  </div>
+  <div class="kpi">
+    <div class="label">Single-Region Users (Mar)</div>
+    <div class="value down">64.1%</div>
+    <div class="detail">was 47.0% in Mar 2025 &mdash; <span class="down">+17.1pp</span></div>
+  </div>
+  <div class="kpi">
+    <div class="label">P25 Spread (Mar)</div>
+    <div class="value down">0.0 km</div>
+    <div class="detail">was 10.3 km in Mar 2025 &mdash; bottom quartile barely moving</div>
+  </div>
+  <div class="kpi">
+    <div class="label">Avg Regions Visited (Mar)</div>
+    <div class="value down">1.74</div>
+    <div class="detail">was 2.21 in Mar 2025 &mdash; <span class="down">-21% YoY</span></div>
+  </div>
+</div>
+
+<!-- SECTION: TRAVEL DISTANCE -->
+<div class="section-label">How far are people travelling?</div>
+<div class="section-desc">Measured by the straight-line distance (km) between each user&rsquo;s furthest-apart GPS positions within NSW per month. Only users with 3+ location readings included.</div>
+
+<div class="grid">
+
+  <!-- Chart 1: Travel spread by percentile (March YoY) -->
+  <div class="card card-full">
+    <h2>Travel Spread by Traveller Type &mdash; March YoY</h2>
+    <p class="desc">Users ranked by distance covered. The biggest drops are in the casual and mid-range segments &mdash; P25 and P50 have effectively collapsed.</p>
+    <canvas id="quartileChart" style="max-height:300px"></canvas>
+  </div>
+
+  <!-- Chart 2: Median travel spread trend -->
+  <div class="card">
+    <h2>Median Travel Spread per User (km)</h2>
+    <p class="desc">The &ldquo;typical&rdquo; user. Stable through Jan, then a steep decline to 15 km in March 2026.</p>
+    <canvas id="spreadChart"></canvas>
+  </div>
+
+  <!-- Chart 3: Avg travel spread -->
+  <div class="card">
+    <h2>Average Travel Spread per User (km)</h2>
+    <p class="desc">Mean spread, pulled up by long-haul travellers. Still showing a clear downward trend in 2026.</p>
+    <canvas id="avgSpreadChart"></canvas>
+  </div>
+
+  <!-- Chart 4: Single-region % -->
+  <div class="card card-full">
+    <h2>% Users Staying in a Single Region</h2>
+    <p class="desc">Share of users detected in only one tourism region that month. Higher = less movement. Jumped from 47% to 64% in March.</p>
+    <canvas id="singleChart" style="max-height:300px"></canvas>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p><strong>Source:</strong> CamperMate app GPS location data, geocoded to NSW tourism regions using Destination NSW official boundary files.</p>
+  <p><strong>Methodology:</strong> Travel spread measures the straight-line distance (km) between a user&rsquo;s furthest-apart GPS positions within NSW for a given month. Only users with 3 or more location readings are included. Tourism region boundaries are official Destination NSW polygons.</p>
+  <p><strong>Assumptions &amp; Caveats:</strong></p>
+  <ul style="margin:6px 0 0 18px; line-height:1.7;">
+    <li>CamperMate&rsquo;s user base skews toward camping and touring travellers (caravanners, road-trippers, backpackers). Results may not be representative of all NSW visitors.</li>
+    <li>We cannot separate intra-NSW locals from interstate or international visitors in these aggregates.</li>
+    <li>Travel spread is a straight-line measure between the two most distant points, not actual road distance travelled. It provides a lower-bound estimate of total distance covered.</li>
+  </ul>
+  <p style="margin-top:10px;">Generated 2 April 2026.</p>
+</div>
+
+<script>
+const C = (id) => document.getElementById(id).getContext('2d');
+
+// CamperMate brand palette
+const cmTeal = '#14b8a6';
+const cmYellow = '#fce94e';
+const cmGreen = '#10b981';
+const cmRed = '#ef4444';
+
+const col2025 = cmTeal;
+const col2026 = cmYellow;
+const months = ['Jan', 'Feb', 'Mar'];
+
+// Chart.js global defaults for dark theme
+Chart.defaults.color = '#9ca3af';
+Chart.defaults.borderColor = '#374151';
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.legend.labels.padding = 16;
+
+// ── Data (from BigQuery aggregate queries, 2 Apr 2026) ──
+const spread = {
+  median2025: [141.8, 138.0, 140.8],
+  median2026: [134.7, 71.8, 15.0],
+  avg2025: [261.8, 264.8, 271.9],
+  avg2026: [256.0, 221.2, 183.0],
+};
+
+const quartiles = {
+  // [Jan, Feb, Mar]
+  p10_2025: [0.0, 0.1, 0.1],   p10_2026: [0.0, 0.0, 0.0],
+  p25_2025: [8.3, 9.5, 10.3],  p25_2026: [7.6, 1.3, 0.0],
+  p50_2025: [141.8, 138.0, 140.8], p50_2026: [134.7, 71.8, 15.0],
+  p75_2025: [455.2, 460.2, 477.4], p75_2026: [438.5, 382.0, 313.9],
+  p90_2025: [683.5, 691.6, 710.7], p90_2026: [685.0, 666.3, 638.8],
+};
+
+const breadth = {
+  pctSingle2025: [47.4, 48.7, 47.0],
+  pctSingle2026: [47.5, 54.4, 64.1],
+};
+
+// ── Shared chart options ──
+const lineOpts = (yLabel) => ({
+  responsive: true,
+  plugins: { legend: { position: 'top' } },
+  scales: { y: { beginAtZero: false, title: { display: true, text: yLabel }, grid: { color: '#374151' } }, x: { grid: { color: '#374151' } } }
+});
+
+const lineset = (label, data, color) => ({
+  label, data, borderColor: color, backgroundColor: color + '33',
+  fill: false, tension: 0.3, pointRadius: 6, pointHoverRadius: 8, borderWidth: 2.5
+});
+
+// ── Chart 1: Quartile grouped bar (March only) ──
+new Chart(C('quartileChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Stationary (P10)', 'Day-tripper / Weekender (P25)', 'Regional Tourer (P50)', 'Road-tripper (P75)', 'Long-haul Traveller (P90)'],
+    datasets: [
+      { label: 'Mar 2025', data: [quartiles.p10_2025[2], quartiles.p25_2025[2], quartiles.p50_2025[2], quartiles.p75_2025[2], quartiles.p90_2025[2]], backgroundColor: col2025 + 'cc', borderRadius: 4 },
+      { label: 'Mar 2026', data: [quartiles.p10_2026[2], quartiles.p25_2026[2], quartiles.p50_2026[2], quartiles.p75_2026[2], quartiles.p90_2026[2]], backgroundColor: col2026 + 'cc', borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top' },
+      tooltip: {
+        callbacks: {
+          afterBody: (ctx) => {
+            const i = ctx[0].dataIndex;
+            const v25 = [quartiles.p10_2025[2], quartiles.p25_2025[2], quartiles.p50_2025[2], quartiles.p75_2025[2], quartiles.p90_2025[2]][i];
+            const v26 = [quartiles.p10_2026[2], quartiles.p25_2026[2], quartiles.p50_2026[2], quartiles.p75_2026[2], quartiles.p90_2026[2]][i];
+            if (v25 === 0) return '';
+            const pct = ((v26 - v25) / v25 * 100).toFixed(1);
+            return `YoY: ${pct}%`;
+          }
+        }
+      }
+    },
+    scales: {
+      y: { title: { display: true, text: 'km' }, grid: { color: '#374151' } },
+      x: { grid: { color: '#374151' } }
+    }
+  }
+});
+
+// ── Chart 2: Median spread ──
+new Chart(C('spreadChart'), {
+  type: 'line',
+  data: { labels: months, datasets: [ lineset('2025', spread.median2025, col2025), lineset('2026', spread.median2026, col2026) ] },
+  options: lineOpts('km')
+});
+
+// ── Chart 3: Avg spread ──
+new Chart(C('avgSpreadChart'), {
+  type: 'line',
+  data: { labels: months, datasets: [ lineset('2025', spread.avg2025, col2025), lineset('2026', spread.avg2026, col2026) ] },
+  options: lineOpts('km')
+});
+
+// ── Chart 4: Single-region % ──
+new Chart(C('singleChart'), {
+  type: 'line',
+  data: { labels: months, datasets: [ lineset('2025', breadth.pctSingle2025, col2025), lineset('2026', breadth.pctSingle2026, col2026) ] },
+  options: { ...lineOpts('%'), scales: { y: { min: 40, max: 70, title: { display: true, text: '%' }, grid: { color: '#374151' } }, x: { grid: { color: '#374151' } } } }
+});
+
+</script>
+</body>
+</html>

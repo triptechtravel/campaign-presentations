@@ -1,0 +1,20 @@
+{
+  "generated": "2026-04-02",
+  "queries": ["nsw-travel-spread-aggregate.sql", "nsw-tourism-regions-aggregate.sql"],
+  "travel_spread": [
+    {"month":"2025-01","yr":"2025","users":13541,"p10":0.0,"p25":8.3,"p50_median":141.8,"p75":455.2,"p90":683.5,"avg_spread":261.8},
+    {"month":"2025-02","yr":"2025","users":10214,"p10":0.1,"p25":9.5,"p50_median":138.0,"p75":460.2,"p90":691.6,"avg_spread":264.8},
+    {"month":"2025-03","yr":"2025","users":11182,"p10":0.1,"p25":10.3,"p50_median":140.8,"p75":477.4,"p90":710.7,"avg_spread":271.9},
+    {"month":"2026-01","yr":"2026","users":7127,"p10":0.0,"p25":7.6,"p50_median":134.7,"p75":438.5,"p90":685.0,"avg_spread":256.0},
+    {"month":"2026-02","yr":"2026","users":6631,"p10":0.0,"p25":1.3,"p50_median":71.8,"p75":382.0,"p90":666.3,"avg_spread":221.2},
+    {"month":"2026-03","yr":"2026","users":14277,"p10":0.0,"p25":0.0,"p50_median":15.0,"p75":313.9,"p90":638.8,"avg_spread":183.0}
+  ],
+  "tourism_regions": [
+    {"month":"2025-01","yr":"2025","users":13541,"avg_regions":2.13,"pct_single_region":47.4},
+    {"month":"2025-02","yr":"2025","users":10214,"avg_regions":2.12,"pct_single_region":48.7},
+    {"month":"2025-03","yr":"2025","users":11182,"avg_regions":2.21,"pct_single_region":47.0},
+    {"month":"2026-01","yr":"2026","users":7127,"avg_regions":2.13,"pct_single_region":47.5},
+    {"month":"2026-02","yr":"2026","users":6631,"avg_regions":1.95,"pct_single_region":54.4},
+    {"month":"2026-03","yr":"2026","users":14277,"avg_regions":1.74,"pct_single_region":64.1}
+  ]
+}
