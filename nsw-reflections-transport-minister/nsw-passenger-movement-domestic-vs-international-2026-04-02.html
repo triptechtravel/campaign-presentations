@@ -56,10 +56,10 @@
 <div style="max-width:1200px; margin:0 auto 28px; background:#1f2937; border-radius:12px; padding:24px 28px; border:1px solid #374151;">
   <h2 style="font-size:18px; font-weight:700; color:#fce94e; margin-bottom:14px;">Key Findings</h2>
   <ul style="list-style:none; padding:0; font-size:15px; line-height:1.8; color:#e5e7eb;">
-    <li style="margin-bottom:8px;"><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>Australian travellers are covering far less ground.</strong> The typical domestic user travelled just 8.5 km across NSW in March 2026, down from 46.7 km a year earlier &mdash; an 82% drop.</li>
+    <li style="margin-bottom:8px;"><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>Domestic users are far less likely to be on a trip.</strong> Half of all Australian app users in March 2026 stayed within 8.5 km &mdash; suggesting many are browsing the app from home rather than actively travelling, compared to a year earlier when the typical user covered 47 km (indicating at least a day trip or weekend away).</li>
     <li style="margin-bottom:8px;"><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>International visitors are also moving less, but still touring.</strong> Their typical travel distance fell 44% year-on-year (256 km &rarr; 144 km), though most are still visiting multiple regions.</li>
     <li style="margin-bottom:8px;"><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>More people are staying put in a single region.</strong> 72% of domestic users and 50% of international users stayed within one NSW tourism region in March 2026, up from 60% and 38% respectively.</li>
-    <li><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>Even long-distance road-trippers are pulling back.</strong> Domestic users who would typically tour 280+ km dropped to under 150 km &mdash; nearly halved.</li>
+    <li><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>Even committed road-trippers are covering less ground.</strong> Among the most active domestic users (top 25%), typical distances dropped from 280 km to under 150 km &mdash; nearly halved.</li>
   </ul>
 </div>
 
@@ -95,44 +95,38 @@
   <!-- Chart 1: Domestic vs International median spread -->
   <div class="card card-full">
     <h2>Median Travel Spread by Origin &mdash; Monthly Trend</h2>
-    <p class="desc">Domestic users (Australian device locale) vs international visitors. Domestic travellers have collapsed to near-zero in 2026, while international visitors are down but still touring.</p>
+    <p class="desc">Domestic users (Australian device) vs international visitors. Solid lines = domestic, dashed lines = international. Teal = 2025, yellow = 2026.</p>
     <canvas id="spreadByOriginChart" style="max-height:300px"></canvas>
   </div>
 
   <!-- Chart 2: Percentile breakdown March YoY - Domestic -->
   <div class="card">
     <h2>Domestic Travel Spread &mdash; March YoY</h2>
-    <p class="desc">Percentile breakdown. The entire domestic distribution has compressed toward zero &mdash; even P75 road-trippers are covering less ground.</p>
+    <p class="desc">Users ranked by distance covered, from least (10th percentile) to most (90th). Distances have dropped across the board &mdash; even the top 25% of domestic travellers are covering far less ground.</p>
     <canvas id="domesticQuartileChart"></canvas>
   </div>
 
   <!-- Chart 3: Percentile breakdown March YoY - International -->
   <div class="card">
     <h2>International Travel Spread &mdash; March YoY</h2>
-    <p class="desc">International visitors still cover substantial distances. The P50 median is down 44% but P90 long-haulers are holding steady.</p>
+    <p class="desc">International visitors still cover substantial distances. The median (50th percentile) is down 44% but the most active long-haul travellers (90th percentile) are holding steady.</p>
     <canvas id="intlQuartileChart"></canvas>
   </div>
 
   <!-- Chart 4: Avg travel spread by origin -->
   <div class="card">
     <h2>Average Travel Spread by Origin (km)</h2>
-    <p class="desc">Mean spread, pulled up by long-haul travellers. International visitors consistently 2&ndash;3x higher than domestic.</p>
+    <p class="desc">Mean spread, pulled up by long-haul travellers. Solid = domestic, dashed = international. Teal = 2025, yellow = 2026.</p>
     <canvas id="avgSpreadChart"></canvas>
   </div>
 
   <!-- Chart 5: Single-region % by origin -->
   <div class="card">
     <h2>% Users Staying in a Single Region</h2>
-    <p class="desc">Share of users detected in only one tourism region that month. Both segments trending up, but domestic users are increasingly stationary.</p>
+    <p class="desc">Share of users detected in only one tourism region that month. Solid = domestic, dashed = international. Teal = 2025, yellow = 2026.</p>
     <canvas id="singleChart"></canvas>
   </div>
 
-  <!-- Chart 6: User counts by origin -->
-  <div class="card card-full">
-    <h2>Active Users by Origin &mdash; Monthly</h2>
-    <p class="desc">Total active users per month (minimum 3 location readings). The &ldquo;Unclassified&rdquo; segment (likely domestic) grows in early 2026 as newer app versions outpaced our home-country classification.</p>
-    <canvas id="userCountChart" style="max-height:280px"></canvas>
-  </div>
 
 </div>
 
@@ -167,7 +161,7 @@ const months = ['Jan', 'Feb', 'Mar'];
 // Chart.js global defaults for dark theme
 Chart.defaults.color = '#9ca3af';
 Chart.defaults.borderColor = '#374151';
-Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.legend.labels.usePointStyle = false;
 Chart.defaults.plugins.legend.labels.padding = 16;
 
 // ── Data ──
@@ -246,7 +240,7 @@ new Chart(C('spreadByOriginChart'), {
 new Chart(C('domesticQuartileChart'), {
   type: 'bar',
   data: {
-    labels: ['P10', 'P25', 'P50', 'P75', 'P90'],
+    labels: ['Bottom 10%', 'Bottom 25%', 'Median', 'Top 25%', 'Top 10%'],
     datasets: [
       { label: 'Mar 2025', data: [quartiles.domP10_2025, quartiles.domP25_2025, quartiles.domP50_2025, quartiles.domP75_2025, quartiles.domP90_2025], backgroundColor: cmTeal + 'cc', borderRadius: 4 },
       { label: 'Mar 2026', data: [quartiles.domP10_2026, quartiles.domP25_2026, quartiles.domP50_2026, quartiles.domP75_2026, quartiles.domP90_2026], backgroundColor: cmYellow + 'cc', borderRadius: 4 }
@@ -263,7 +257,7 @@ new Chart(C('domesticQuartileChart'), {
 new Chart(C('intlQuartileChart'), {
   type: 'bar',
   data: {
-    labels: ['P10', 'P25', 'P50', 'P75', 'P90'],
+    labels: ['Bottom 10%', 'Bottom 25%', 'Median', 'Top 25%', 'Top 10%'],
     datasets: [
       { label: 'Mar 2025', data: [quartiles.intlP10_2025, quartiles.intlP25_2025, quartiles.intlP50_2025, quartiles.intlP75_2025, quartiles.intlP90_2025], backgroundColor: cmTeal + 'cc', borderRadius: 4 },
       { label: 'Mar 2026', data: [quartiles.intlP10_2026, quartiles.intlP25_2026, quartiles.intlP50_2026, quartiles.intlP75_2026, quartiles.intlP90_2026], backgroundColor: cmYellow + 'cc', borderRadius: 4 }
@@ -306,26 +300,6 @@ new Chart(C('singleChart'), {
   options: { ...lineOpts('%'), scales: { y: { min: 30, max: 80, title: { display: true, text: '%' }, grid: { color: '#374151' } }, x: { grid: { color: '#374151' } } } }
 });
 
-// ── Chart 6: User counts stacked bar ──
-new Chart(C('userCountChart'), {
-  type: 'bar',
-  data: {
-    labels: ['Jan 25', 'Feb 25', 'Mar 25', 'Jan 26', 'Feb 26', 'Mar 26'],
-    datasets: [
-      { label: 'Domestic', data: [...userCounts.dom2025, ...userCounts.dom2026], backgroundColor: cmTeal, borderRadius: 2 },
-      { label: 'International', data: [...userCounts.intl2025, ...userCounts.intl2026], backgroundColor: cmIndigo, borderRadius: 2 },
-      { label: 'Unclassified (likely domestic)', data: [...userCounts.unc2025, ...userCounts.unc2026], backgroundColor: cmGray, borderRadius: 2 },
-    ]
-  },
-  options: {
-    responsive: true,
-    plugins: { legend: { position: 'top' } },
-    scales: {
-      y: { stacked: true, title: { display: true, text: 'Users' }, grid: { color: '#374151' } },
-      x: { stacked: true, grid: { color: '#374151' } }
-    }
-  }
-});
 </script>
 </body>
 </html>

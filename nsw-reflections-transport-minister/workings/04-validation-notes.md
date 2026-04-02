@@ -84,3 +84,22 @@ Confirmed that even for old native events, the staging table lat/lng is the USER
 | Jan 26 | 59.9% | 38.0% | 52.0% |
 | Feb 26 | 66.9% | 43.7% | 81.0% |
 | Mar 26 | 71.6% | 49.8% | 91.2% |
+
+## User Count Decline — Real or Tracking Artefact?
+
+Herman flagged that the Jan/Feb 2026 user count dip might be due to how the new iOS app classifies events (e.g. favouriting). We tested this by comparing total users vs users with `location_change` events only (which is consistent across all app versions):
+
+| Month | All events | location_change only |
+|-------|-----------|---------------------|
+| Jan 25 | 24,743 | 23,589 |
+| Feb 25 | 18,830 | 18,007 |
+| Mar 25 | 20,477 | 19,686 |
+| Jan 26 | 11,729 | 11,383 |
+| Feb 26 | 10,865 | 8,924 |
+| Mar 26 | 22,663 | 9,007 |
+
+**Findings:**
+- On `location_change` alone, **Jan–Mar 2026 has ~50% fewer users than 2025**. This is a real decline, not a tracking artefact.
+- Herman is correct that the new iOS app inflates event-based user counts — March 2026 shows 22,663 users on all events but only 9,007 on `location_change` (the 5.x app fires GPS on every interaction, including favouriting, browsing, ad impressions etc.).
+- However, the event classification difference **does not explain the decline** — it explains why March 2026 appears to *surge* in the all-events view while the underlying active-traveller count has halved.
+- The user count chart was removed from the dashboard to avoid this confusion.
