@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NSW Travel Distance Analysis — CamperMate App Data</title>
+<title>NSW Travel Distance Analysis  - CamperMate App Data</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -50,16 +50,16 @@
 <div class="header">
   <h1>NSW Passenger Movement Analysis</h1>
   <p class="subtitle">Are travellers covering less distance? How do domestic and international visitors compare?</p>
-  <p>Data: CamperMate app GPS data &mdash; Jan&ndash;Mar 2025 vs Jan&ndash;Mar 2026 &mdash; New South Wales only</p>
+  <p>Data: CamperMate app GPS data  - Jan&ndash;Mar 2025 vs Jan&ndash;Mar 2026  - New South Wales only</p>
 </div>
 
 <div style="max-width:1200px; margin:0 auto 28px; background:#1f2937; border-radius:12px; padding:24px 28px; border:1px solid #374151;">
   <h2 style="font-size:18px; font-weight:700; color:#fce94e; margin-bottom:14px;">Key Findings</h2>
   <ul style="list-style:none; padding:0; font-size:15px; line-height:1.8; color:#e5e7eb;">
-    <li style="margin-bottom:8px;"><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>Domestic users are far less likely to be on a trip.</strong> Half of all Australian app users in March 2026 stayed within 8.5 km &mdash; suggesting many are browsing the app from home rather than actively travelling, compared to a year earlier when the typical user covered 47 km (indicating at least a day trip or weekend away).</li>
+    <li style="margin-bottom:8px;"><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>Domestic users are far less likely to be on a trip.</strong> Half of all Australian app users in March 2026 stayed within 8.5 km  - suggesting many are browsing the app from home rather than actively travelling, compared to a year earlier when the typical user covered 47 km (indicating at least a day trip or weekend away).</li>
     <li style="margin-bottom:8px;"><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>International visitors are also moving less, but still touring.</strong> Their typical travel distance fell 44% year-on-year (256 km &rarr; 144 km), though most are still visiting multiple regions.</li>
     <li style="margin-bottom:8px;"><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>More people are staying put in a single region.</strong> 72% of domestic users and 50% of international users stayed within one NSW tourism region in March 2026, up from 60% and 38% respectively.</li>
-    <li><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>Even committed road-trippers are covering less ground.</strong> Among the most active domestic users (top 25%), typical distances dropped from 280 km to under 150 km &mdash; nearly halved.</li>
+    <li><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>Even committed road-trippers are covering less ground.</strong> Among the most active domestic users (top 25%), typical distances dropped from 280 km to under 150 km  - nearly halved.</li>
   </ul>
 </div>
 
@@ -67,22 +67,22 @@
   <div class="kpi">
     <div class="label">Domestic Median Spread (Mar)</div>
     <div class="value down">8.5 km</div>
-    <div class="detail">was 46.7 km in Mar 2025 &mdash; <span class="down">-82% YoY</span></div>
+    <div class="detail">was 46.7 km in Mar 2025  - <span class="down">-82% YoY</span></div>
   </div>
   <div class="kpi">
     <div class="label">International Median Spread (Mar)</div>
     <div class="value down">143.5 km</div>
-    <div class="detail">was 255.5 km in Mar 2025 &mdash; <span class="down">-44% YoY</span></div>
+    <div class="detail">was 255.5 km in Mar 2025  - <span class="down">-44% YoY</span></div>
   </div>
   <div class="kpi">
     <div class="label">Domestic Single-Region (Mar)</div>
     <div class="value down">71.6%</div>
-    <div class="detail">was 59.7% in Mar 2025 &mdash; <span class="down">+11.9pp</span></div>
+    <div class="detail">was 59.7% in Mar 2025  - <span class="down">+11.9pp</span></div>
   </div>
   <div class="kpi">
     <div class="label">International Single-Region (Mar)</div>
     <div class="value down">49.8%</div>
-    <div class="detail">was 38.3% in Mar 2025 &mdash; <span class="down">+11.5pp</span></div>
+    <div class="detail">was 38.3% in Mar 2025  - <span class="down">+11.5pp</span></div>
   </div>
 </div>
 
@@ -94,21 +94,21 @@
 
   <!-- Chart 1: Domestic vs International median spread -->
   <div class="card card-full">
-    <h2>Median Travel Spread by Origin &mdash; Monthly Trend</h2>
+    <h2>Median Travel Spread by Origin  - Monthly Trend</h2>
     <p class="desc">Domestic users (Australian device) vs international visitors. Solid lines = domestic, dashed lines = international. Teal = 2025, yellow = 2026.</p>
     <canvas id="spreadByOriginChart" style="max-height:300px"></canvas>
   </div>
 
   <!-- Chart 2: Percentile breakdown March YoY - Domestic -->
   <div class="card">
-    <h2>Domestic Travel Spread &mdash; March YoY</h2>
-    <p class="desc">Users ranked by distance covered, from least (10th percentile) to most (90th). Distances have dropped across the board &mdash; even the top 25% of domestic travellers are covering far less ground.</p>
+    <h2>Domestic Travel Spread  - March YoY</h2>
+    <p class="desc">Users ranked by distance covered, from least (10th percentile) to most (90th). Distances have dropped across the board  - even the top 25% of domestic travellers are covering far less ground.</p>
     <canvas id="domesticQuartileChart"></canvas>
   </div>
 
   <!-- Chart 3: Percentile breakdown March YoY - International -->
   <div class="card">
-    <h2>International Travel Spread &mdash; March YoY</h2>
+    <h2>International Travel Spread  - March YoY</h2>
     <p class="desc">International visitors still cover substantial distances. The median (50th percentile) is down 44% but the most active long-haul travellers (90th percentile) are holding steady.</p>
     <canvas id="intlQuartileChart"></canvas>
   </div>
@@ -136,7 +136,7 @@
   <p><strong>Assumptions &amp; Caveats:</strong></p>
   <ul style="margin:6px 0 0 18px; line-height:1.7;">
     <li>CamperMate&rsquo;s user base skews toward camping and touring travellers (caravanners, road-trippers, backpackers). Results may not be representative of all NSW visitors.</li>
-    <li>We can identify a user&rsquo;s home <em>country</em> but not their home <em>state</em>. &ldquo;Domestic&rdquo; means an Australian device &mdash; we cannot separate intra-NSW locals from interstate visitors.</li>
+    <li>We can identify a user&rsquo;s home <em>country</em> but not their home <em>state</em>. &ldquo;Domestic&rdquo; means an Australian device  - we cannot separate intra-NSW locals from interstate visitors.</li>
     <li>Home country classification for some recent app users is still being processed. These appear as &ldquo;Unclassified&rdquo; in the user count chart and are excluded from the domestic/international breakdowns.</li>
     <li>Travel spread is a straight-line measure between the two most distant points, not actual road distance travelled. It provides a lower-bound estimate of total distance covered.</li>
   </ul>
