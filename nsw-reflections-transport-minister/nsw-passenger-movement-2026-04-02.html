@@ -47,66 +47,66 @@
 <div style="max-width:1200px; margin:0 auto 28px; background:#1f2937; border-radius:12px; padding:24px 28px; border:1px solid #374151;">
   <h2 style="font-size:18px; font-weight:700; color:#fce94e; margin-bottom:14px;">Key Findings</h2>
   <ul style="list-style:none; padding:0; font-size:15px; line-height:1.8; color:#e5e7eb;">
-    <li style="margin-bottom:8px;"><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>The typical user&rsquo;s travel distance has collapsed.</strong> Median travel spread fell from 141 km to just 15 km in March &mdash; an 89% drop year-on-year.</li>
+    <li style="margin-bottom:8px;"><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>The typical user&rsquo;s travel distance has collapsed.</strong> In March 2025 a typical user covered about 141 km across NSW. In March 2026 that dropped to just 15 km &mdash; an 89% fall.</li>
     <li style="margin-bottom:8px;"><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>More people are staying put in a single region.</strong> 64% of users stayed within one NSW tourism region in March 2026, up from 47% a year earlier.</li>
-    <li><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>Even committed road-trippers are covering less ground.</strong> The top 25% of travellers saw their typical distance drop from 477 km to 314 km &mdash; a 34% decline.</li>
+    <li><span style="color:#ef4444; font-weight:600;">&#9660;</span> <strong>Even the most active travellers are covering less ground.</strong> Among the top 25% of users by distance, the typical trip dropped from 477 km to 314 km &mdash; a 34% decline.</li>
   </ul>
 </div>
 
 <div class="kpi-row">
   <div class="kpi">
-    <div class="label">Median Travel Spread (Mar)</div>
+    <div class="label">Typical Travel Distance (Mar)</div>
     <div class="value down">15.0 km</div>
-    <div class="detail">was 140.8 km in Mar 2025 &mdash; <span class="down">-89.3% YoY</span></div>
+    <div class="detail">was 141 km in Mar 2025 &mdash; <span class="down">-89% year-on-year</span></div>
   </div>
   <div class="kpi">
     <div class="label">Single-Region Users (Mar)</div>
     <div class="value down">64.1%</div>
-    <div class="detail">was 47.0% in Mar 2025 &mdash; <span class="down">+17.1pp</span></div>
+    <div class="detail">was 47% in Mar 2025 &mdash; <span class="down">+17 percentage points</span></div>
   </div>
   <div class="kpi">
-    <div class="label">P25 Spread (Mar)</div>
+    <div class="label">Casual Traveller Distance (Mar)</div>
     <div class="value down">0.0 km</div>
-    <div class="detail">was 10.3 km in Mar 2025 &mdash; bottom quartile barely moving</div>
+    <div class="detail">was 10 km in Mar 2025 &mdash; the bottom 25% of users are barely moving</div>
   </div>
   <div class="kpi">
     <div class="label">Avg Regions Visited (Mar)</div>
     <div class="value down">1.74</div>
-    <div class="detail">was 2.21 in Mar 2025 &mdash; <span class="down">-21% YoY</span></div>
+    <div class="detail">was 2.21 in Mar 2025 &mdash; <span class="down">-21% year-on-year</span></div>
   </div>
 </div>
 
 <!-- SECTION: TRAVEL DISTANCE -->
 <div class="section-label">How far are people travelling?</div>
-<div class="section-desc">Measured by the straight-line distance (km) between each user&rsquo;s furthest-apart GPS positions within NSW per month. Only users with 3+ location readings included.</div>
+<div class="section-desc">We measure each user&rsquo;s travel distance as the straight-line distance between their furthest-apart GPS positions within NSW each month. Only users with 3 or more location readings are included.</div>
 
 <div class="grid">
 
   <!-- Chart 1: Travel spread by percentile (March YoY) -->
   <div class="card card-full">
-    <h2>Travel Spread by Traveller Type &mdash; March YoY</h2>
-    <p class="desc">Users ranked by distance covered. The biggest drops are in the casual and mid-range segments &mdash; P25 and P50 have effectively collapsed.</p>
+    <h2>Distance Covered by Traveller Type &mdash; March, Year-on-Year</h2>
+    <p class="desc">Users grouped from least active (left) to most active (right). The biggest drops are among casual and mid-range travellers &mdash; day-trippers and regional tourers have effectively stopped moving.</p>
     <canvas id="quartileChart" style="max-height:300px"></canvas>
   </div>
 
   <!-- Chart 2: Median travel spread trend -->
   <div class="card">
-    <h2>Median Travel Spread per User (km)</h2>
-    <p class="desc">The &ldquo;typical&rdquo; user. Stable through Jan, then a steep decline to 15 km in March 2026.</p>
+    <h2>Typical User Travel Distance (km)</h2>
+    <p class="desc">The middle-of-the-road user. Stable through January, then a steep decline to just 15 km by March 2026.</p>
     <canvas id="spreadChart"></canvas>
   </div>
 
   <!-- Chart 3: Avg travel spread -->
   <div class="card">
-    <h2>Average Travel Spread per User (km)</h2>
-    <p class="desc">Mean spread, pulled up by long-haul travellers. Still showing a clear downward trend in 2026.</p>
+    <h2>Average Travel Distance per User (km)</h2>
+    <p class="desc">The average is higher than the typical because long-distance travellers pull it up. Still showing a clear downward trend in 2026.</p>
     <canvas id="avgSpreadChart"></canvas>
   </div>
 
   <!-- Chart 4: Single-region % -->
   <div class="card card-full">
-    <h2>% Users Staying in a Single Region</h2>
-    <p class="desc">Share of users detected in only one tourism region that month. Higher = less movement. Jumped from 47% to 64% in March.</p>
+    <h2>Users Staying in a Single Region (%)</h2>
+    <p class="desc">The share of users who only appeared in one NSW tourism region that month. A higher number means less multi-region travel. Jumped from 47% to 64% in March.</p>
     <canvas id="singleChart" style="max-height:300px"></canvas>
   </div>
 
@@ -114,12 +114,12 @@
 
 <div class="footer">
   <p><strong>Source:</strong> CamperMate app GPS location data, geocoded to NSW tourism regions using Destination NSW official boundary files.</p>
-  <p><strong>Methodology:</strong> Travel spread measures the straight-line distance (km) between a user&rsquo;s furthest-apart GPS positions within NSW for a given month. Only users with 3 or more location readings are included. Tourism region boundaries are official Destination NSW polygons.</p>
+  <p><strong>Methodology:</strong> Travel distance is the straight-line distance (km) between a user&rsquo;s two furthest-apart GPS positions within NSW for a given month. Only users with 3 or more location readings are included. Tourism region boundaries are official Destination NSW boundaries.</p>
   <p><strong>Assumptions &amp; Caveats:</strong></p>
   <ul style="margin:6px 0 0 18px; line-height:1.7;">
     <li>CamperMate&rsquo;s user base skews toward camping and touring travellers (caravanners, road-trippers, backpackers). Results may not be representative of all NSW visitors.</li>
     <li>We cannot separate intra-NSW locals from interstate or international visitors in these aggregates.</li>
-    <li>Travel spread is a straight-line measure between the two most distant points, not actual road distance travelled. It provides a lower-bound estimate of total distance covered.</li>
+    <li>Distance is measured as a straight line between the two furthest-apart points, not actual road distance. This means real distances travelled are likely higher than shown.</li>
   </ul>
   <p style="margin-top:10px;">Generated 2 April 2026.</p>
 </div>
@@ -181,7 +181,7 @@ const lineset = (label, data, color) => ({
 new Chart(C('quartileChart'), {
   type: 'bar',
   data: {
-    labels: ['Stationary (P10)', 'Day-tripper / Weekender (P25)', 'Regional Tourer (P50)', 'Road-tripper (P75)', 'Long-haul Traveller (P90)'],
+    labels: ['Barely Moving (Bottom 10%)', 'Day-tripper (Bottom 25%)', 'Typical User (Middle)', 'Road-tripper (Top 25%)', 'Long-haul (Top 10%)'],
     datasets: [
       { label: 'Mar 2025', data: [quartiles.p10_2025[2], quartiles.p25_2025[2], quartiles.p50_2025[2], quartiles.p75_2025[2], quartiles.p90_2025[2]], backgroundColor: col2025 + 'cc', borderRadius: 4 },
       { label: 'Mar 2026', data: [quartiles.p10_2026[2], quartiles.p25_2026[2], quartiles.p50_2026[2], quartiles.p75_2026[2], quartiles.p90_2026[2]], backgroundColor: col2026 + 'cc', borderRadius: 4 }
@@ -199,7 +199,7 @@ new Chart(C('quartileChart'), {
             const v26 = [quartiles.p10_2026[2], quartiles.p25_2026[2], quartiles.p50_2026[2], quartiles.p75_2026[2], quartiles.p90_2026[2]][i];
             if (v25 === 0) return '';
             const pct = ((v26 - v25) / v25 * 100).toFixed(1);
-            return `YoY: ${pct}%`;
+            return `Change: ${pct}%`;
           }
         }
       }
